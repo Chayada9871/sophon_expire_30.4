@@ -130,6 +130,9 @@ function applyCoverage(rows, coverageDays) {
 function Sidebar() {
   return (
     <aside className="sidebar">
+      <div className="sidebar-brand">
+        <img src="/images/logo.png" alt="Sophon" />
+      </div>
       <div className="sidebar-title">เมนู</div>
       {navItems.map((item) => (
         <a key={item.label} href={item.href} className={`sidebar-link${item.href === "/dashboard" ? " active" : ""}`}>
@@ -614,9 +617,9 @@ export default function DashboardClient() {
             <div>
               <div className="section-head"><div><div className="section-kicker">ทางลัดงาน</div><h2>เมนูที่ใช้บ่อย</h2><p>รวมหน้าที่ใช้บ่อย เพื่อเปิดทำงานต่อได้ทันที</p></div></div>
               <div className="actions-grid">
-                <a className="action-card" href="#"><div className="action-tag">เร่งด่วน</div><div className="action-title">จัดการของหมดอายุ / ชำรุด</div><div className="action-help">ดูรายการที่ต้องตาม ส่งคืน หรือสรุปผล</div></a>
-                <a className="action-card" href="#"><div className="action-tag">ติดตาม</div><div className="action-title">แจ้งสินค้าชำรุด</div><div className="action-help">ดูของชำรุดที่ค้างและอัปเดตสถานะ</div></a>
-                <a className="action-card" href="#"><div className="action-tag">ตรวจสอบ</div><div className="action-title">ตรวจสอบสินค้า</div><div className="action-help">ดูข้อมูลสินค้าและรายละเอียดที่เกี่ยวข้อง</div></a>
+                <a className="action-card" href="/expire-returns"><div className="action-tag">เร่งด่วน</div><div className="action-title">จัดการของหมดอายุ / ชำรุด</div><div className="action-help">ดูรายการที่ต้องตาม ส่งคืน หรือสรุปผล</div></a>
+                <a className="action-card" href="/damaged-manage"><div className="action-tag">ติดตาม</div><div className="action-title">แจ้งสินค้าชำรุด</div><div className="action-help">ดูของชำรุดที่ค้างและอัปเดตสถานะ</div></a>
+                <a className="action-card" href="/products"><div className="action-tag">ตรวจสอบ</div><div className="action-title">ตรวจสอบสินค้า</div><div className="action-help">ดูข้อมูลสินค้าและรายละเอียดที่เกี่ยวข้อง</div></a>
               </div>
             </div>
           </section>

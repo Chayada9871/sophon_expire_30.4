@@ -893,6 +893,184 @@
         width: 100%;
       }
     }
+
+    /* Sophon Driver visual refresh */
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --line: #d8dee8;
+      --primary: #f97316;
+      --primary-hover: #c2410c;
+      --sophon-navy: #020617;
+      --sophon-orange: #f97316;
+      --shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+      --radius: 0;
+    }
+
+    body {
+      background:
+        linear-gradient(90deg, rgba(249, 115, 22, 0.07) 0 1px, transparent 1px 84px),
+        linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0 1px, transparent 1px 84px),
+        linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%) !important;
+    }
+
+    .sidebar {
+      width: 276px !important;
+      padding: 18px !important;
+      background:
+        linear-gradient(180deg, rgba(249, 115, 22, 0.15) 0%, transparent 24%),
+        var(--sophon-navy) !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 18px 0 50px rgba(2, 6, 23, 0.22) !important;
+    }
+
+    .sidebar h2 {
+      position: relative !important;
+      width: 112px !important;
+      height: 112px !important;
+      margin: 0 auto 20px !important;
+      padding: 0 !important;
+      border: 1px solid rgba(249, 115, 22, 0.42) !important;
+      background: #271089 url("/images/logo.png") center / cover no-repeat !important;
+      color: transparent !important;
+      font-size: 0 !important;
+      text-indent: 0 !important;
+      overflow: hidden !important;
+      box-shadow:
+        0 0 0 8px rgba(255, 255, 255, 0.035),
+        0 16px 32px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .sidebar h2::before {
+      content: "" !important;
+      position: absolute !important;
+      inset: -10px !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      pointer-events: none !important;
+    }
+
+    .sidebar h2::after {
+      content: none !important;
+    }
+
+    .sidebar a {
+      min-height: 44px !important;
+      margin-bottom: 8px !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      border-radius: 0 !important;
+      background: rgba(255, 255, 255, 0.04) !important;
+      color: #e2e8f0 !important;
+      font-size: 13px !important;
+      font-weight: 800 !important;
+      transform: none !important;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      border-color: var(--sophon-orange) !important;
+      background: var(--sophon-orange) !important;
+      color: #ffffff !important;
+      transform: none !important;
+    }
+
+    .page {
+      margin-left: 276px !important;
+      max-width: none !important;
+      padding: 22px !important;
+    }
+
+    .topbar,
+    .card,
+    .summary-box,
+    .mini-box,
+    .stat-card,
+    .table-wrap,
+    .modal,
+    .modal-info-box,
+    .message-box,
+    .line-item,
+    .doc-item,
+    .status-badge,
+    .badge,
+    input,
+    select,
+    textarea,
+    button {
+      border-radius: 0 !important;
+    }
+
+    .topbar,
+    .card {
+      background: rgba(255, 255, 255, 0.97) !important;
+      border: 1px solid #d8dee8 !important;
+      box-shadow: 0 22px 56px rgba(15, 23, 42, 0.12) !important;
+    }
+
+    .topbar {
+      padding: 18px !important;
+      align-items: center !important;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--sophon-orange) !important;
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15) !important;
+    }
+
+    .btn-primary,
+    button.btn-primary {
+      background: var(--sophon-orange) !important;
+      color: #ffffff !important;
+    }
+
+    .btn-primary:hover,
+    button.btn-primary:hover {
+      background: var(--primary-hover) !important;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 100 !important;
+        width: 100% !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        overflow-x: auto !important;
+        padding: 8px !important;
+        border-right: 0 !important;
+      }
+
+      .sidebar h2 {
+        flex: 0 0 54px !important;
+        width: 54px !important;
+        height: 54px !important;
+        margin: 0 !important;
+      }
+
+      .sidebar h2::before {
+        content: none !important;
+      }
+
+      .sidebar h2::after {
+        display: none !important;
+      }
+
+      .sidebar a {
+        flex: 0 0 auto !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+        padding: 0 12px !important;
+      }
+
+      .page {
+        margin-left: 0 !important;
+        padding: 14px !important;
+      }
+    }
   </style>
 </head>
 <body>

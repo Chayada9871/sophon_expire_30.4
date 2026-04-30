@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import LegacyFrame from "@/components/LegacyFrame";
 
 export default function StockInPage() {
-  redirect("/legacy/stock_in.html");
+  return <LegacyFrame src="/legacy/stock_in.html" title="Stock In" />;
 }

@@ -1,5 +1,5 @@
-import DashboardClient from "@/components/dashboard-client";
+import LegacyFrame from "@/components/LegacyFrame";
 
 export default function DashboardPage() {
-  return <DashboardClient />;
+  return <LegacyFrame src="/legacy/dashboard.html" title="Dashboard" />;
 }

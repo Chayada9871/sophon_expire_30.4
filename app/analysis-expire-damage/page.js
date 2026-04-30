@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import LegacyFrame from "@/components/LegacyFrame";
 
 export default function AnalysisExpireDamagePage() {
-  redirect("/legacy/analysis_expire_damage.html");
+  return <LegacyFrame src="/legacy/analysis_expire_damage.html" title="Expire Damage Analysis" />;
 }

@@ -107,6 +107,52 @@
       min-width: 1350px;
     }
 
+    .history-note-cell {
+      min-width: 320px;
+      max-width: 520px;
+    }
+
+    .staff-note {
+      color: #0f172a;
+      font-size: 13px;
+      line-height: 1.55;
+      white-space: pre-line;
+    }
+
+    .staff-note.empty {
+      color: #94a3b8;
+    }
+
+    .system-history-title {
+      margin-top: 8px;
+      margin-bottom: 5px;
+      color: #64748b;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .system-history-list {
+      display: grid;
+      gap: 5px;
+    }
+
+    .system-history-line {
+      padding: 7px 8px;
+      border: 1px solid #d8dee8;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .system-history-line strong {
+      display: block;
+      color: #0f172a;
+      font-size: 12px;
+    }
+
     @media (max-width: 1200px) {
       .toolbar-grid {
         grid-template-columns: 1fr 1fr;
@@ -368,6 +414,58 @@
       return `<span class="badge damaged">-</span>`;
     }
 
+    function isSystemNoteLine(line) {
+      const text = String(line || "");
+      return /\[(EXPIRED_CONFIRMED|SOLD_OUT_CONFIRMED|MANAGER_REVIEW|CHECKED_BY|CHECK_OK|EXPIRED_READY_FOR_RETURN)\]/.test(text)
+        || (/[เธเน]/.test(text) && /\[[^\]]+\]/.test(text));
+    }
+
+    function splitNoteText(note) {
+      const lines = String(note || "").split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+      const staff = [];
+      const system = [];
+      lines.forEach(line => isSystemNoteLine(line) ? system.push(line) : staff.push(line));
+      return { staff: staff.join("\n"), systemLines: system };
+    }
+
+    function systemNoteTitle(line) {
+      if (line.includes("[SOLD_OUT_CONFIRMED]")) return "ยืนยันสินค้าหมดสต๊อกแล้ว";
+      if (line.includes("[EXPIRED_CONFIRMED]")) return "ยืนยันสินค้าหมดอายุแล้ว";
+      if (line.includes("[MANAGER_REVIEW]")) return "รอ Manager ตรวจสอบ";
+      if (line.includes("[CHECK_OK]")) return "ตรวจนับแล้ว ยอดตรงระบบ";
+      if (line.includes("[EXPIRED_READY_FOR_RETURN]")) return "ส่งต่อไปจัดการของหมดอายุ";
+      if (line.includes("[CHECKED_BY]")) return "บันทึกผู้ตรวจนับ";
+      return "ประวัติระบบ";
+    }
+
+    function systemNoteDetail(line) {
+      const text = String(line || "");
+      const date = (text.match(/\[(\d{1,2}\/\d{1,2}\/\d{4}[^\]]*)\]/) || [])[1] || "";
+      const user = (text.match(/(?:ผู้ยืนยัน|โดย|User|user)\s*:?\s*([^|\]]+)/) || [])[1]?.trim() || "";
+      const parts = [];
+      if (date) parts.push(date);
+      if (user) parts.push(`โดย ${user}`);
+      return parts.length ? parts.join(" | ") : "บันทึกจากระบบ";
+    }
+
+    function renderHistoryNote(note) {
+      const info = splitNoteText(note);
+      const staffHtml = info.staff
+        ? `<div class="staff-note">${escapeHtml(info.staff)}</div>`
+        : `<div class="staff-note empty">ไม่มีหมายเหตุจากพนักงาน</div>`;
+
+      if (!info.systemLines.length) return staffHtml;
+
+      const systemHtml = info.systemLines.slice(-3).map(line => `
+        <div class="system-history-line">
+          <strong>${escapeHtml(systemNoteTitle(line))}</strong>
+          ${escapeHtml(systemNoteDetail(line))}
+        </div>
+      `).join("");
+
+      return `${staffHtml}<div class="system-history-title">ประวัติระบบ</div><div class="system-history-list">${systemHtml}</div>`;
+    }
+
     function updateSummary(rows) {
       const total = rows.length;
       const expireCount = rows.filter(r => r.cause_type === "expire").length;
@@ -580,7 +678,7 @@
           <td>${escapeHtml(formatNumber(item.qty))}</td>
           <td>${escapeHtml(item.supplier_name || "-")}</td>
           <td>${getStatusBadge(item.final_status)}</td>
-          <td>${escapeHtml(item.note || "-")}</td>
+          <td class="history-note-cell">${renderHistoryNote(item.note)}</td>
           <td>${escapeHtml(formatDateTime(item.handled_at))}</td>
         </tr>
       `).join("");

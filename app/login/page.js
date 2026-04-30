@@ -52,7 +52,10 @@ export default function LoginPage() {
   return (
     <main className="auth-shell">
       <section className="auth-card">
-        <div className="auth-kicker">Expire Tracker</div>
+        <div className="auth-brand">
+          <img src="/images/logo.png" alt="Sophon" />
+        </div>
+        <div className="auth-kicker">Sophon Driver</div>
         <h1>เข้าสู่ระบบ</h1>
         <p>เริ่มใช้งานระบบติดตามวันหมดอายุ ด้วยหน้าระบบใหม่ที่อ่านง่ายและจัดการต่อได้สะดวกขึ้น</p>
 

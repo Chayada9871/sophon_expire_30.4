@@ -397,6 +397,225 @@
       opacity: 0.65;
       pointer-events: none;
     }
+
+    .pdf-deduct-summary {
+      display: grid;
+      gap: 6px;
+      min-width: 118px;
+    }
+
+    .pdf-deduct-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 8px;
+      border: 1px solid #d8dee8;
+      background: #fff;
+      color: #334155;
+      font-size: 12px;
+    }
+
+    .pdf-deduct-line strong {
+      color: #0f172a;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .pdf-deduct-line.is-deducted {
+      border-color: #bfdbfe;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .pdf-deduct-line.is-deducted strong {
+      color: #1d4ed8;
+    }
+
+    /* Stock Out page polish */
+    .stockout-guide {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .guide-step {
+      position: relative;
+      display: block;
+      min-height: 118px;
+      padding: 16px 14px 14px 56px;
+      background: #fff;
+      border: 1px solid #d8dee8;
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    .guide-step::before {
+      content: attr(data-step);
+      position: absolute;
+      top: 16px;
+      left: 15px;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      background: #f97316;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .guide-step:hover {
+      border-color: #f97316;
+      background: #fff7ed;
+    }
+
+    .guide-kicker {
+      color: #f97316;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .guide-title {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .guide-text {
+      margin-top: 6px;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .stockout-link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .stockout-link-row a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 0 12px;
+      border: 1px solid #d8dee8;
+      background: #fff;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .stockout-link-row a:hover {
+      border-color: #f97316;
+      background: #fff7ed;
+      color: #9a3412;
+    }
+
+    .main-grid {
+      grid-template-columns: minmax(360px, 0.72fr) minmax(0, 1.28fr) !important;
+      gap: 18px !important;
+    }
+
+    .left-stack {
+      gap: 14px !important;
+    }
+
+    .card h2 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px !important;
+      font-size: 18px !important;
+    }
+
+    .subtext {
+      color: #64748b !important;
+      font-size: 12px !important;
+      line-height: 1.5 !important;
+    }
+
+    .simple-top-summary {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+
+    .simple-stat {
+      background: #fff !important;
+      border: 1px solid #d8dee8 !important;
+      border-radius: 0 !important;
+    }
+
+    .simple-stat .label {
+      color: #64748b !important;
+      font-size: 11px !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+    }
+
+    .simple-stat .value {
+      color: #0f172a !important;
+      font-size: 24px !important;
+    }
+
+    .doc-table-wrap,
+    .lot-card,
+    .readonly-note,
+    .user-only-banner,
+    .pdf-preview-qty-input,
+    .modal,
+    .modal-close {
+      border-radius: 0 !important;
+    }
+
+    .doc-table-wrap {
+      border-color: #d8dee8 !important;
+    }
+
+    .lot-card {
+      background: #fff !important;
+      border-color: #d8dee8 !important;
+      box-shadow: none !important;
+    }
+
+    .lot-card-status {
+      border-radius: 0 !important;
+      background: #fff7ed !important;
+      color: #9a3412 !important;
+      border: 1px solid #fed7aa;
+    }
+
+    .modal-header,
+    .modal-footer {
+      background: #f8fafc !important;
+    }
+
+    .page.user-view .stockout-guide {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 1200px) {
+      .stockout-guide,
+      .main-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .stockout-guide,
+      .page.user-view .stockout-guide,
+      .simple-top-summary {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -433,6 +652,36 @@
 
     <div id="messageBox" class="message-box"></div>
 
+    <div class="stockout-guide">
+      <a class="guide-step" data-step="1" href="#salesUploadForm">
+        <div class="guide-kicker">Daily Sales</div>
+        <div class="guide-title">เลือกเอกสารขาย</div>
+        <div class="guide-text">อัปโหลด PDF ใหม่ หรือเลือกไฟล์เดิมที่ต้องการตรวจ</div>
+      </a>
+      <a class="guide-step" data-step="2" href="#selectedSalesUpload">
+        <div class="guide-kicker">FEFO</div>
+        <div class="guide-title">อ่าน PDF และตรวจยอด</div>
+        <div class="guide-text">ดูจำนวนจาก PDF ก่อน ระบบจะแสดงยอดที่ตัดสต๊อกจริงให้เทียบกัน</div>
+      </a>
+      <a class="guide-step" data-step="3" href="#stockCheckCardTitle">
+        <div class="guide-kicker">Stock Check</div>
+        <div class="guide-title">ตัดสต๊อกและตรวจนับ</div>
+        <div class="guide-text">ตัดตาม FEFO แล้วค้นหาสินค้าเพื่อตรวจจำนวนจริงหน้าร้าน</div>
+      </a>
+      <a class="guide-step" data-step="4" href="expired_history.html">
+        <div class="guide-kicker">Follow Up</div>
+        <div class="guide-title">ปิดงานที่เหลือ</div>
+        <div class="guide-text">เช็กประวัติ และส่งต่อของหมดอายุหรือของชำรุดไปหน้าจัดการ</div>
+      </a>
+    </div>
+
+    <div class="stockout-link-row">
+      <a href="stock_in.html">รับสินค้าเข้า</a>
+      <a href="products.html">ตรวจข้อมูลสินค้า</a>
+      <a href="expire_returns.html">จัดการของหมดอายุ / ชำรุด</a>
+      <a href="expired_history.html">ประวัติคืน / ตัดออก</a>
+    </div>
+
     <div id="userOnlyBanner" class="user-only-banner">
       <h3>โหมดผู้ใช้งานทั่วไป</h3>
       <p>
@@ -452,8 +701,8 @@
     <div class="main-grid">
       <div class="left-stack" id="salesAccessPanel">
         <div class="card">
-          <h2>1. โหลด PDF</h2>
-          <p class="subtext">อัปโหลดเอกสารขายประจำวัน วันละ 1 ไฟล์ และอัปโหลดซ้ำเพื่อแทนที่ไฟล์เดิมได้</p>
+          <h2>1. เอกสารขาย PDF</h2>
+          <p class="subtext">เพิ่มหรือแก้ไขไฟล์ Daily Sales สำหรับวันที่ขายนั้น</p>
 
           <form id="salesUploadForm" class="form-grid">
             <input type="hidden" id="salesUploadEditId">
@@ -489,8 +738,8 @@
         </div>
 
         <div class="card">
-          <h2>2. รายการขาย</h2>
-          <p class="subtext">เลือกเอกสาร แล้วอ่าน PDF หรือดูสรุปรายการขาย</p>
+          <h2>2. ตรวจยอดจาก PDF</h2>
+          <p class="subtext">เลือกเอกสารเพื่อดูจำนวนใน PDF และจำนวนที่ตัดสต๊อกแล้ว</p>
 
           <div class="form-grid">
             <div class="form-group">
@@ -511,6 +760,10 @@
               <div class="value" id="salesLineQtyTotal">0</div>
             </div>
             <div class="mini-box">
+              <div class="label">ตัดจาก PDF</div>
+              <div class="value" id="salesDeductQtyTotal">0</div>
+            </div>
+            <div class="mini-box">
               <div class="label">สถานะ</div>
               <div class="value" id="salesUploadStatusLabel">-</div>
             </div>
@@ -526,8 +779,8 @@
         </div>
 
         <div class="card">
-          <h2>3. เอกสารที่บันทึกไว้</h2>
-          <p class="subtext">แสดงชื่อผู้อัปโหลด ผู้แก้ไข และผู้ตรวจนับล่าสุด</p>
+          <h2>3. เอกสารล่าสุด</h2>
+          <p class="subtext">เลือก เปิด อ่านซ้ำ หรือยกเลิกการตัดสต๊อกตามสิทธิ์ผู้ใช้</p>
           <div id="salesUploadsList"></div>
         </div>
       </div>
@@ -785,6 +1038,26 @@
     };
 
     const $ = (id) => document.getElementById(id);
+
+    const NEXT_ROUTES = {
+      "login.html": "/login",
+      "dashboard.html": "/dashboard",
+      "products.html": "/products",
+      "stock_in.html": "/stock-in",
+      "stock_out.html": "/stock-out",
+      "expire_returns.html": "/expire-returns",
+      "expired_history.html": "/expired-history",
+      "damaged_manage.html": "/damaged-manage"
+    };
+
+    function goToPage(target) {
+      const route = NEXT_ROUTES[target] || target;
+      if (window.parent && window.parent !== window) {
+        window.parent.location.href = route;
+      } else {
+        window.location.href = route;
+      }
+    }
     function getSelectedUploadId() {
       return $("selectedSalesUpload")?.value || "";
     }
@@ -851,7 +1124,7 @@
       const user = getCurrentUser();
       if (!user) {
         alert("กรุณาเข้าสู่ระบบ");
-        window.location.href = "login.html";
+        goToPage("login.html");
         return null;
       }
       return user;
@@ -1004,7 +1277,7 @@
           title.innerHTML = `ตรวจนับสินค้า <span class="role-badge" id="currentRoleBadge">${getRoleText(state.currentUser?.role || "user")}</span>`;
         }
         if (subtitle) {
-          subtitle.textContent = "สำหรับผู้ใช้งานทั่วไป: ตรวจนับจริงและบันทึกผลการตรวจนับ";
+          subtitle.textContent = "ตรวจนับจริง บันทึกผู้ตรวจ และส่งงานที่ต้องจัดการต่อไปยังหน้าที่เกี่ยวข้อง";
         }
         if (stockCheckTitle) {
           stockCheckTitle.textContent = "ตรวจนับสินค้า";
@@ -1017,13 +1290,13 @@
           title.innerHTML = `ตัดสต๊อก / ตรวจนับ / Daily Sales <span class="role-badge" id="currentRoleBadge">${getRoleText(state.currentUser?.role || "user")}</span>`;
         }
         if (subtitle) {
-          subtitle.textContent = "อัปโหลด PDF, บันทึกรายการขาย, ตัดสต๊อก, ตรวจนับจริง";
+          subtitle.textContent = "ทำงานตามลำดับ: อัปโหลดยอดขาย อ่าน PDF ตัดสต๊อกแบบ FEFO แล้วตรวจนับจริง";
         }
         if (stockCheckTitle) {
           stockCheckTitle.textContent = "ล็อตสินค้า / ตรวจนับจริง";
         }
         if (stockCheckSub) {
-          stockCheckSub.textContent = "ดูแบบง่ายขึ้น และแสดงรายการที่ต้องให้ manager ตรวจชัดเจน";
+          stockCheckSub.textContent = "ค้นหา ตรวจนับ และส่งต่อของหมดอายุ/หมดสต๊อกไปหน้าที่เกี่ยวข้อง";
         }
       }
     }
@@ -2875,6 +3148,7 @@ function formatEditorTimestamp(value) {
       if (!canViewSalesFiles()) {
         $("salesLineCount").textContent = "0";
         $("salesLineQtyTotal").textContent = "0";
+        $("salesDeductQtyTotal").textContent = "0";
         $("salesUploadStatusLabel").textContent = "-";
         $("detailReportDateRange").textContent = "-";
         state.salesBatchDeductMap = {};
@@ -2886,6 +3160,7 @@ function formatEditorTimestamp(value) {
       if (!uploadId) {
         $("salesLineCount").textContent = "0";
         $("salesLineQtyTotal").textContent = "0";
+        $("salesDeductQtyTotal").textContent = "0";
         $("salesUploadStatusLabel").textContent = "-";
         $("detailReportDateRange").textContent = "-";
         state.salesBatchDeductMap = {};
@@ -2900,9 +3175,11 @@ function formatEditorTimestamp(value) {
 
         const lineCount = state.salesLines.length;
         const totalQty = state.salesLines.reduce((sum, item) => sum + normalizeNumber(item.sold_qty), 0);
+        const deductedTotal = getSelectedDeductTotal();
 
         $("salesLineCount").textContent = lineCount;
         $("salesLineQtyTotal").textContent = formatQty(totalQty);
+        $("salesDeductQtyTotal").textContent = formatQty(deductedTotal);
         $("salesUploadStatusLabel").textContent = upload?.status === "processed" ? "ตัดสต๊อกแล้ว" : "รอดำเนินการ";
         $("detailReportDateRange").textContent = upload
           ? formatReportDateRange(upload.report_date_start, upload.report_date_end)
@@ -3036,6 +3313,80 @@ function formatEditorTimestamp(value) {
           <div class="sub-mini-text">${escapeHtml(item.product_name || "-")}</div>
         </div>
       `).join("");
+    }
+
+    function getSelectedDeductTotalForGroup(groupItems) {
+      return groupItems.reduce(
+        (sum, item) => sum + normalizeNumber(state.salesBatchDeductMap[String(item.id)] || 0),
+        0
+      );
+    }
+
+    function getSelectedDeductTotal() {
+      return Object.values(state.salesBatchDeductMap)
+        .reduce((sum, value) => sum + normalizeNumber(value), 0);
+    }
+
+    function getSelectedSalesTotalForGroup(groupItems) {
+      const codes = new Set();
+      const productIds = new Set();
+      const names = new Set();
+
+      groupItems.forEach(item => {
+        [
+          item.product_barcode,
+          item.products?.barcode,
+          item.products?.product_code,
+          item.batch_no
+        ].forEach(value => {
+          const normalized = normalizeSalesMatchValue(value);
+          if (normalized) codes.add(normalized);
+        });
+
+        const productId = Number(item.product_id || item.products?.id || 0);
+        if (productId) productIds.add(productId);
+
+        const nameKey = normalizeSalesMatchValue(item.product_name || item.products?.product_name || "");
+        if (nameKey) names.add(nameKey);
+      });
+
+      return state.salesLines
+        .filter(line => {
+          const lineCode = normalizeSalesMatchValue(line.product_barcode || "");
+          const lineProductId = Number(line.product_id || 0);
+          const lineName = normalizeSalesMatchValue(line.product_name || "");
+          return (lineCode && codes.has(lineCode)) || (lineProductId && productIds.has(lineProductId)) || (lineName && names.has(lineName));
+        })
+        .reduce((sum, line) => sum + normalizeNumber(line.sold_qty), 0);
+    }
+
+    function getSalesAndDeductSummaryForProduct(groupItems) {
+      const selectedUploadId = getSelectedUploadId();
+      if (!selectedUploadId) {
+        return `<div class="sub-mini-text">เลือกเอกสาร PDF</div>`;
+      }
+
+      const salesHtml = getSalesSummaryForProduct(groupItems);
+      const salesQty = getSelectedSalesTotalForGroup(groupItems);
+      const deductedQty = getSelectedDeductTotalForGroup(groupItems);
+
+      if (!state.salesLines.length && deductedQty <= 0) {
+        return `<div class="sub-mini-text">ยังไม่มีรายการจาก PDF</div>`;
+      }
+
+      return `
+        <div class="pdf-deduct-summary">
+          <div class="pdf-deduct-line">
+            <span>ยอดขาย PDF</span>
+            <strong>${escapeHtml(formatQty(salesQty))}</strong>
+          </div>
+          <div>${salesHtml}</div>
+          <div class="pdf-deduct-line is-deducted">
+            <span>ตัดสต๊อกแล้ว</span>
+            <strong>${escapeHtml(formatQty(deductedQty))}</strong>
+          </div>
+        </div>
+      `;
     }
 
     function updateStats(allBatches) {
@@ -3191,7 +3542,7 @@ function formatEditorTimestamp(value) {
       : null;
 
     const latestEditor = getLatestEditorInfo(groupItems);
-    const salesSummary = getSalesSummaryForProduct(groupItems);
+    const salesSummary = getSalesAndDeductSummaryForProduct(groupItems);
       const selectedUploadId = getSelectedUploadId();
       const selectedUpload = getUploadById(selectedUploadId);
       const selectedUploadDateText = selectedUpload?.sales_date ? formatDate(selectedUpload.sales_date) : "";
@@ -3723,7 +4074,7 @@ function openProductStockCheckModal(barcode, productId) {
       } else if (movedHistoryBatchIds.length) {
         const goToHistoryPage = confirm("มีสินค้าหมดสต๊อกที่ยืนยันแล้ว ต้องการไปหน้า ประวัติสินค้าคืนแล้ว ตอนนี้หรือไม่?");
         if (goToHistoryPage) {
-          window.location.href = "expired_history.html";
+          goToPage("expired_history.html");
         }
       }
       showMessage("บันทึกผลตรวจนับเรียบร้อย", "success");
@@ -3733,7 +4084,7 @@ function openProductStockCheckModal(barcode, productId) {
           "มีล็อตหมดอายุที่บันทึกแล้ว\nต้องการเปิดหน้า expire_returns.html ตอนนี้หรือไม่?"
         );
         if (goToExpiredPage) {
-          window.location.href = "expire_returns.html";
+          goToPage("expire_returns.html");
         }
       }
     } catch (error) {
@@ -3857,6 +4208,7 @@ function openProductStockCheckModal(barcode, productId) {
       if (!canViewSalesFiles()) {
         $("salesLineCount").textContent = "0";
         $("salesLineQtyTotal").textContent = "0";
+        $("salesDeductQtyTotal").textContent = "0";
         $("salesUploadStatusLabel").textContent = "-";
         $("detailReportDateRange").textContent = "-";
         renderBatches();

@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import LegacyFrame from "@/components/LegacyFrame";
 
 export default function BatchesPage() {
-  redirect("/legacy/batches.html");
+  return <LegacyFrame src="/legacy/batches.html" title="Batches" />;
 }

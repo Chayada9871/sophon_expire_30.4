@@ -1,18 +1,14 @@
-# Next.js Migration
+# Next.js App
 
-This workspace now includes a Next.js app structure on top of the existing HTML project.
+This workspace is now based on the Next.js app router. The old standalone HTML pages and legacy static bundle have been removed.
 
-## Migrated now
+## Main files
 
-- `app/login/page.js`
-- `app/dashboard/page.js`
-- `components/dashboard-client.js`
-- shared browser Supabase/session helpers in `lib/`
-- shared styling in `app/globals.css`
-
-## Still old HTML
-
-The original `.html` pages are still in the project and can be used as reference while the remaining screens are migrated.
+- `app/` contains routes.
+- `components/` contains shared UI and dashboard components.
+- `lib/` contains Supabase, session, formatting, and dashboard helpers.
+- `public/images/` contains public image assets.
+- `app/globals.css` contains shared styling.
 
 ## Run
 
@@ -27,6 +23,6 @@ The original `.html` pages are still in the project and can be used as reference
 
 ## Notes
 
-- The new app keeps the current browser-side Supabase approach.
 - Login still stores the current user in `localStorage`.
-- Sidebar links other than dashboard are placeholders for now and should be migrated next.
+- The dashboard is the main migrated data-rich screen.
+- Supporting routes are now native Next.js pages and can be expanded with full workflows next.

@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import LegacyFrame from "@/components/LegacyFrame";
 
 export default function DamagedManagePage() {
-  redirect("/legacy/damaged_manage.html");
+  return <LegacyFrame src="/legacy/damaged_manage.html" title="Damaged Manage" />;
 }

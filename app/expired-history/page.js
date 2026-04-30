@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import LegacyFrame from "@/components/LegacyFrame";
 
 export default function ExpiredHistoryPage() {
-  redirect("/legacy/expired_history.html");
+  return <LegacyFrame src="/legacy/expired_history.html" title="Expired History" />;
 }

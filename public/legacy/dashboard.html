@@ -1122,6 +1122,610 @@
         align-items: flex-start;
       }
     }
+
+    /* Sophon Driver dashboard polish */
+    body {
+      background:
+        linear-gradient(90deg, rgba(249, 115, 22, 0.07) 0 1px, transparent 1px 84px),
+        linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0 1px, transparent 1px 84px),
+        linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%) !important;
+    }
+
+    .page::before,
+    .dashboard-intro {
+      display: none !important;
+    }
+
+    .dashboard-shell {
+      max-width: none !important;
+      gap: 20px !important;
+    }
+
+    .topbar,
+    .overview-panel,
+    .card,
+    .chart-card,
+    .stat-card,
+    .action-card,
+    .summary-box,
+    .summary-alert,
+    .focus-row,
+    .sales-summary-card,
+    .mini-card,
+    .rank-row,
+    .table-wrap,
+    .empty-state,
+    .count-badge,
+    .legend-pill,
+    .card-footer-link {
+      border-radius: 0 !important;
+    }
+
+    .topbar {
+      padding: 18px !important;
+      background: #ffffff !important;
+      border: 1px solid #d8dee8 !important;
+      box-shadow: 0 18px 44px rgba(15, 23, 42, 0.1) !important;
+      align-items: center !important;
+      margin-bottom: 0 !important;
+    }
+
+    .page-header h1 {
+      margin-bottom: 0 !important;
+      color: #0f172a !important;
+      font-size: clamp(30px, 3vw, 40px) !important;
+      letter-spacing: 0 !important;
+    }
+
+    .page-header p,
+    .section-heading p,
+    .stat-sub,
+    .action-sub,
+    .subtext,
+    .chart-sub,
+    .summary-alert-sub,
+    .focus-sub,
+    .sales-summary-card .sub,
+    .toolbar-note {
+      display: none !important;
+    }
+
+    .topbar-right {
+      align-items: center !important;
+    }
+
+    .summary-box {
+      min-width: 220px !important;
+      padding: 13px 15px !important;
+      background: #f8fafc !important;
+      border: 1px solid #d8dee8 !important;
+      box-shadow: none !important;
+    }
+
+    .summary-box .label,
+    .stat-label,
+    .sales-summary-card .label {
+      color: #64748b !important;
+      font-size: 11px !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+    }
+
+    .summary-box .value {
+      color: #0f172a !important;
+      font-size: 20px !important;
+    }
+
+    .overview-panel {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr) !important;
+      gap: 18px !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .section-block {
+      gap: 14px !important;
+    }
+
+    .section-heading {
+      padding-bottom: 2px !important;
+      align-items: end !important;
+    }
+
+    .section-kicker {
+      margin-bottom: 5px !important;
+      color: #f97316 !important;
+      font-size: 10px !important;
+      letter-spacing: 0.2em !important;
+    }
+
+    .section-heading h2 {
+      color: #0f172a !important;
+      font-size: 22px !important;
+      letter-spacing: 0 !important;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(5, minmax(150px, 1fr)) !important;
+      gap: 12px !important;
+    }
+
+    .stat-card,
+    .action-card,
+    .card,
+    .chart-card,
+    .sales-summary-card {
+      background: #ffffff !important;
+      border: 1px solid #d8dee8 !important;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08) !important;
+    }
+
+    .stat-card {
+      min-height: 118px !important;
+      padding: 17px !important;
+      overflow: hidden !important;
+    }
+
+    .stat-card::after,
+    .action-card::after {
+      display: none !important;
+    }
+
+    .stat-value {
+      margin-top: 10px !important;
+      color: #0f172a !important;
+      font-size: clamp(28px, 3vw, 38px) !important;
+      letter-spacing: 0 !important;
+    }
+
+    .text-green { color: #059669 !important; }
+    .text-blue { color: #2563eb !important; }
+    .text-orange { color: #f97316 !important; }
+    .text-red { color: #dc2626 !important; }
+    .text-purple { color: #7c3aed !important; }
+
+    .quick-actions {
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+    }
+
+    .action-card {
+      min-height: 74px !important;
+      padding: 15px !important;
+    }
+
+    .action-card:hover {
+      border-color: #f97316 !important;
+      background: #fff7ed !important;
+      transform: none !important;
+    }
+
+    .action-tag {
+      color: #c2410c !important;
+      background: #fff7ed !important;
+      border: 1px solid #fed7aa !important;
+      border-radius: 0 !important;
+      letter-spacing: 0.12em !important;
+    }
+
+    .action-title {
+      color: #0f172a !important;
+      font-size: 16px !important;
+    }
+
+    .staff-guide {
+      counter-reset: staff-step !important;
+    }
+
+    .staff-guide .action-card {
+      position: relative !important;
+      padding-left: 58px !important;
+    }
+
+    .staff-guide .action-card::before {
+      counter-increment: staff-step;
+      content: counter(staff-step);
+      position: absolute;
+      left: 15px;
+      top: 16px;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      background: #f97316;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .staff-guide .action-tag {
+      background: transparent !important;
+      border: 0 !important;
+      padding: 0 !important;
+      color: #f97316 !important;
+    }
+
+    .staff-guide .action-sub {
+      display: block !important;
+      margin-top: 7px !important;
+      color: #64748b !important;
+      font-size: 12px !important;
+      line-height: 1.55 !important;
+    }
+
+    .alert-grid,
+    .page-grid,
+    .dashboard-footer-grid {
+      gap: 16px !important;
+    }
+
+    .summary-alerts,
+    .focus-box,
+    .mini-list,
+    .rank-list {
+      gap: 10px !important;
+    }
+
+    .summary-alert,
+    .focus-row,
+    .rank-row,
+    .mini-card {
+      padding: 14px !important;
+      background: #ffffff !important;
+      border: 1px solid #d8dee8 !important;
+      box-shadow: none !important;
+    }
+
+    .summary-alert.critical {
+      border-left: 4px solid #dc2626 !important;
+    }
+
+    .summary-alert.warning {
+      border-left: 4px solid #f97316 !important;
+    }
+
+    .summary-alert.info {
+      border-left: 4px solid #2563eb !important;
+    }
+
+    .summary-alert-title,
+    .focus-title,
+    .mini-title,
+    .rank-title {
+      color: #0f172a !important;
+      font-weight: 900 !important;
+    }
+
+    .summary-alert-value,
+    .focus-value,
+    .rank-value {
+      font-size: 28px !important;
+      letter-spacing: 0 !important;
+    }
+
+    .chart-grid {
+      gap: 16px !important;
+      margin-top: 0 !important;
+    }
+
+    .chart-card {
+      padding: 16px !important;
+      overflow: hidden !important;
+    }
+
+    .chart-card::before {
+      height: 3px !important;
+      background: linear-gradient(90deg, #f97316 0%, #2563eb 52%, #0891b2 100%) !important;
+    }
+
+    .chart-card h2,
+    .card h2 {
+      color: #0f172a !important;
+      font-size: 18px !important;
+      letter-spacing: 0 !important;
+      margin-bottom: 12px !important;
+    }
+
+    .chart-wrap {
+      margin-top: 10px !important;
+      min-height: 250px !important;
+    }
+
+    .chart-wrap.short {
+      min-height: 220px !important;
+    }
+
+    .sales-summary-grid {
+      gap: 12px !important;
+    }
+
+    .sales-summary-card {
+      padding: 16px !important;
+    }
+
+    .sales-summary-card .value {
+      color: #0f172a !important;
+      font-size: 34px !important;
+      letter-spacing: 0 !important;
+    }
+
+    .reorder-toolbar {
+      margin-bottom: 12px !important;
+      justify-content: flex-end !important;
+    }
+
+    .toolbar-controls {
+      margin-left: auto !important;
+    }
+
+    th {
+      background: #f8fafc !important;
+      color: #475569 !important;
+      font-size: 11px !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+    }
+
+    @media (max-width: 1200px) {
+      .overview-panel {
+        grid-template-columns: 1fr !important;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      }
+
+      .quick-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .stats-grid,
+      .quick-actions {
+        grid-template-columns: 1fr !important;
+      }
+
+      .summary-box,
+      .topbar-right,
+      .topbar-right button {
+        width: 100% !important;
+      }
+    }
+
+    .today-hub {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .today-primary,
+    .today-panel {
+      background: #ffffff;
+      border: 1px solid #d8dee8;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+      padding: 18px;
+    }
+
+    .today-primary {
+      display: grid;
+      gap: 14px;
+    }
+
+    .today-kicker {
+      color: #f97316;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .today-title {
+      margin: 0;
+      color: #0f172a;
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .today-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .today-step {
+      display: grid;
+      gap: 7px;
+      min-height: 118px;
+      padding: 13px;
+      border: 1px solid #d8dee8;
+      background: #f8fafc;
+      color: #0f172a;
+      text-decoration: none;
+    }
+
+    .today-step:hover {
+      border-color: #f97316;
+      background: #fff7ed;
+    }
+
+    .today-step-number {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      background: #f97316;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .today-step-title {
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .today-step-text {
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .today-panel-title {
+      margin-bottom: 12px;
+      color: #0f172a;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .today-action-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .today-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1px solid #d8dee8;
+      background: #ffffff;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .today-action:hover {
+      border-color: #f97316;
+      background: #fff7ed;
+      color: #9a3412;
+    }
+
+    .today-action span:last-child {
+      color: #f97316;
+      font-weight: 900;
+    }
+
+    .dashboard-shell {
+      gap: 18px !important;
+    }
+
+    .overview-panel {
+      gap: 18px !important;
+    }
+
+    .section-heading h2 {
+      font-size: 22px !important;
+    }
+
+    .section-heading p,
+    .stat-sub,
+    .action-sub {
+      color: #64748b !important;
+      font-size: 12px !important;
+      line-height: 1.55 !important;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+      gap: 12px !important;
+    }
+
+    .stat-card,
+    .action-card,
+    .summary-alert,
+    .sales-summary-card,
+    .chart-card,
+    .card {
+      border-radius: 0 !important;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06) !important;
+    }
+
+    .stat-card {
+      padding: 15px !important;
+      background: #ffffff !important;
+      border-color: #d8dee8 !important;
+    }
+
+    .stat-card::after,
+    .action-card::after,
+    .chart-card::before {
+      display: none !important;
+    }
+
+    .stat-label {
+      color: #64748b !important;
+      font-size: 11px !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+    }
+
+    .stat-value {
+      font-size: 28px !important;
+      letter-spacing: 0 !important;
+    }
+
+    .quick-actions.staff-guide {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+
+    .action-card {
+      min-height: 132px;
+      padding: 15px !important;
+      background: #ffffff !important;
+      border-color: #d8dee8 !important;
+    }
+
+    .action-card:hover {
+      border-color: #f97316 !important;
+      background: #fff7ed !important;
+      transform: none !important;
+    }
+
+    .action-tag {
+      color: #f97316 !important;
+    }
+
+    .alert-grid,
+    .page-grid,
+    .chart-grid {
+      gap: 14px !important;
+    }
+
+    .chart-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    @media (max-width: 1200px) {
+      .today-hub,
+      .stats-grid,
+      .quick-actions.staff-guide,
+      .chart-grid {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .today-hub,
+      .today-grid,
+      .stats-grid,
+      .quick-actions.staff-guide,
+      .chart-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1272,35 +1876,35 @@
         <div class="section-block">
           <div class="section-heading">
             <div>
-              <div class="section-kicker">ทางลัด</div>
-              <h2>เริ่มทำงานเร็ว</h2>
-              <p>เปิดหน้าหลักที่ใช้บ่อยสำหรับงานหมดอายุและของเสียหาย</p>
+              <div class="section-kicker">คู่มือพนักงาน</div>
+              <h2>ทำตามขั้นตอนนี้</h2>
+              <p>เริ่มจากตรวจรายการที่ต้องจัดการ แล้วบันทึกผลให้ครบตามลำดับ</p>
             </div>
           </div>
 
-          <div class="quick-actions">
+          <div class="quick-actions staff-guide">
             <a class="action-card" href="expire_returns.html">
-              <div class="action-tag">เร่งด่วน</div>
-              <div class="action-title">หมดอายุ / ชำรุด</div>
-              <div class="action-sub">เพิ่มรายการ, เลือกคืน supplier หรือทำลาย และปิดงานให้ครบ</div>
+              <div class="action-tag">ขั้นตอน 1</div>
+              <div class="action-title">ตรวจของหมดอายุ / ชำรุด</div>
+              <div class="action-sub">เปิดรายการที่ระบบเตือน แล้วเช็กสินค้า ล็อต และจำนวนให้ตรงกับของจริง</div>
             </a>
 
             <a class="action-card" href="damaged_manage.html">
-              <div class="action-tag">ติดตาม</div>
-              <div class="action-title">สินค้าเสียหาย</div>
-              <div class="action-sub">บันทึกของเสียหาย และอัปเดตสถานะจนปิดงาน</div>
+              <div class="action-tag">ขั้นตอน 2</div>
+              <div class="action-title">บันทึกหรือแจ้งปัญหา</div>
+              <div class="action-sub">ถ้ามีสินค้าเสียหาย ให้บันทึกรายการและอัปเดตสถานะการติดต่อผู้จำหน่าย</div>
             </a>
 
             <a class="action-card" href="expired_history.html">
-              <div class="action-tag">ตรวจผล</div>
-              <div class="action-title">ประวัติคืน / ตัดออก</div>
-              <div class="action-sub">ตรวจว่ารายการถูกบันทึกถูกต้อง และย้อนดูย้อนหลังได้</div>
+              <div class="action-tag">ขั้นตอน 3</div>
+              <div class="action-title">ยืนยันการคืน / ตัดออก</div>
+              <div class="action-sub">หลังคืน supplier หรือทำลายแล้ว ให้ตรวจว่ารายการถูกบันทึกในประวัติเรียบร้อย</div>
             </a>
 
             <a class="action-card" href="products.html">
-              <div class="action-tag">ค้นหา</div>
-              <div class="action-title">ตรวจสอบสินค้า</div>
-              <div class="action-sub">เช็กข้อมูลสินค้า, บาร์โค้ด และรายละเอียดที่เกี่ยวข้อง</div>
+              <div class="action-tag">ขั้นตอน 4</div>
+              <div class="action-title">ตรวจข้อมูลสินค้าเมื่อไม่แน่ใจ</div>
+              <div class="action-sub">ใช้หน้านี้ค้นหาชื่อสินค้า บาร์โค้ด หน่วย และรายละเอียดก่อนบันทึกงาน</div>
             </a>
           </div>
         </div>

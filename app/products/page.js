@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import LegacyFrame from "@/components/LegacyFrame";
 
 export default function ProductsPage() {
-  redirect("/legacy/products.html");
+  return <LegacyFrame src="/legacy/products.html" title="Products" />;
 }

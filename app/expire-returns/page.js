@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import LegacyFrame from "@/components/LegacyFrame";
 
 export default function ExpireReturnsPage() {
-  redirect("/legacy/expire_returns.html");
+  return <LegacyFrame src="/legacy/expire_returns.html" title="Expire Returns" />;
 }
