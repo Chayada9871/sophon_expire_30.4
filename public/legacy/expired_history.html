@@ -153,6 +153,175 @@
       font-size: 12px;
     }
 
+    .summary-row {
+      max-width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      padding-bottom: 6px;
+    }
+
+    .summary-box {
+      min-width: 145px;
+      scroll-snap-align: start;
+    }
+
+    .toolbar-grid {
+      grid-template-columns: minmax(180px, 1fr) 140px 150px 150px auto;
+      gap: 8px;
+    }
+
+    .toolbar-grid input,
+    .toolbar-grid select {
+      min-width: 0;
+      width: 100%;
+      height: 34px;
+      font-size: 11px;
+    }
+
+    .toolbar-grid button {
+      min-height: 34px !important;
+      padding: 5px 8px !important;
+      font-size: 11px !important;
+    }
+
+    .card {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .table-wrap {
+      max-width: 100%;
+      overflow-x: auto !important;
+      overflow-y: visible !important;
+      -webkit-overflow-scrolling: touch;
+      border-color: #d8dee8 !important;
+      border-radius: 0 !important;
+    }
+
+    .table-wrap table {
+      min-width: 860px !important;
+      table-layout: fixed !important;
+      font-size: 10px;
+    }
+
+    .table-wrap th,
+    .table-wrap td {
+      padding: 6px 7px !important;
+      line-height: 1.25;
+      vertical-align: top;
+    }
+
+    .table-wrap th {
+      font-size: 9px !important;
+      letter-spacing: 0 !important;
+    }
+
+    .table-wrap th:nth-child(1),
+    .table-wrap td:nth-child(1) { width: 78px; }
+    .table-wrap th:nth-child(2),
+    .table-wrap td:nth-child(2) { width: 190px; }
+    .table-wrap th:nth-child(3),
+    .table-wrap td:nth-child(3) { width: 96px; }
+    .table-wrap th:nth-child(4),
+    .table-wrap td:nth-child(4) { width: 72px; }
+    .table-wrap th:nth-child(5),
+    .table-wrap td:nth-child(5) { width: 160px; }
+    .table-wrap th:nth-child(6),
+    .table-wrap td:nth-child(6) { width: 100px; }
+    .table-wrap th:nth-child(7),
+    .table-wrap td:nth-child(7) { width: 250px; }
+    .table-wrap th:nth-child(8),
+    .table-wrap td:nth-child(8) { width: 110px; }
+
+    .badge {
+      padding: 2px 5px !important;
+      font-size: 9px !important;
+    }
+
+    .history-note-cell {
+      min-width: 0;
+      max-width: none;
+    }
+
+    .staff-note,
+    .system-history-line {
+      font-size: 9px;
+      line-height: 1.25;
+    }
+
+    .system-history-title {
+      margin-top: 4px;
+      margin-bottom: 2px;
+      font-size: 8px;
+      letter-spacing: 0;
+    }
+
+    .system-history-list {
+      gap: 2px;
+    }
+
+    .system-history-line {
+      padding: 3px 4px;
+    }
+
+    .system-history-line strong {
+      font-size: 9px;
+    }
+
+    .history-note,
+    .result-count,
+    .sub-mini-text {
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .table-wrap table,
+    .table-wrap td,
+    .table-wrap td strong,
+    .badge,
+    .staff-note,
+    .staff-note.empty,
+    .system-history-line,
+    .system-history-line strong,
+    .sub-mini-text,
+    .result-count {
+      font-size: 10px !important;
+      line-height: 1.3 !important;
+    }
+
+    .table-wrap th,
+    .system-history-title {
+      font-size: 10px !important;
+      line-height: 1.25 !important;
+    }
+
+    .badge {
+      padding: 3px 6px !important;
+    }
+
+    .table-wrap table { min-width: 1020px !important; }
+    .table-wrap th:nth-child(1),
+    .table-wrap td:nth-child(1) { width: 78px; }
+    .table-wrap th:nth-child(2),
+    .table-wrap td:nth-child(2) { width: 180px; }
+    .table-wrap th:nth-child(3),
+    .table-wrap td:nth-child(3) { width: 100px; }
+    .table-wrap th:nth-child(4),
+    .table-wrap td:nth-child(4) { width: 92px; }
+    .table-wrap th:nth-child(5),
+    .table-wrap td:nth-child(5) { width: 70px; }
+    .table-wrap th:nth-child(6),
+    .table-wrap td:nth-child(6) { width: 150px; }
+    .table-wrap th:nth-child(7),
+    .table-wrap td:nth-child(7) { width: 100px; }
+    .table-wrap th:nth-child(8),
+    .table-wrap td:nth-child(8) { width: 250px; }
+    .table-wrap th:nth-child(9),
+    .table-wrap td:nth-child(9) { width: 90px; }
+    .table-wrap th:nth-child(10),
+    .table-wrap td:nth-child(10) { width: 110px; }
+
     @media (max-width: 1200px) {
       .toolbar-grid {
         grid-template-columns: 1fr 1fr;
@@ -252,7 +421,6 @@
           <option value="sold_out">หมดสต๊อก</option>
           <option value="returned">ส่งคืนแล้ว</option>
           <option value="disposed">ทำลาย</option>
-          <option value="damaged">ชำรุด</option>
         </select>
 
         <select id="sortFilter" onchange="renderTable()">
@@ -275,19 +443,20 @@
           <thead>
             <tr>
               <th>ที่มา</th>
-              <th>สินค้า</th>
-              <th>ล็อต</th>
+              <th>สินค้า / ล็อต</th>
+              <th>รหัส/บาร์โค้ด</th>
               <th>วันที่อ้างอิง</th>
-              <th>จำนวนที่จัดการ</th>
-              <th>ผู้จำหน่าย</th>
+              <th>จำนวน</th>
+              <th>ผู้จำหน่าย / สาเหตุ</th>
               <th>สถานะสุดท้าย</th>
-              <th>หมายเหตุ</th>
+              <th>หมายเหตุ / ประวัติ</th>
+              <th>แก้ไขโดย</th>
               <th>วันที่จัดการ</th>
             </tr>
           </thead>
           <tbody id="tableBody">
             <tr>
-              <td colspan="9" class="loading-row">กำลังโหลดข้อมูล...</td>
+              <td colspan="10" class="loading-row">กำลังโหลดข้อมูล...</td>
             </tr>
           </tbody>
         </table>
@@ -503,11 +672,14 @@
           handling_status,
           handling_note,
           handled_at,
+          handled_by,
           product_id,
           supplier_id,
           products:product_id (
             product_name,
-            unit
+            unit,
+            product_code,
+            barcode
           ),
           suppliers:supplier_id (
             name
@@ -523,14 +695,17 @@
         cause_type: String(item.handling_note || "").includes("[SOLD_OUT_CONFIRMED]") ? "sold_out" : "expire",
         product_name: item.products?.product_name || "-",
         product_unit: item.products?.unit || "-",
+        product_code: item.products?.product_code || item.products?.barcode || "-",
         batch_no: item.batch_no || "-",
         reference_date: item.expiry_date,
         qty: Number(item.quantity_remaining || 0),
         supplier_name: item.suppliers?.name || "-",
+        reason_text: String(item.handling_note || "").includes("[SOLD_OUT_CONFIRMED]") ? "ยืนยันสินค้าหมดสต๊อก" : "สินค้าหมดอายุ",
         final_status: String(item.handling_note || "").includes("[SOLD_OUT_CONFIRMED]")
           ? "sold_out"
           : item.handling_status,
         note: item.handling_note || "",
+        handled_by: item.handled_by || "-",
         handled_at: item.handled_at
       }));
     }
@@ -551,7 +726,12 @@
           note,
           reported_by,
           reported_at,
-          updated_at
+          updated_at,
+          updated_by,
+          products:product_id (
+            product_code,
+            barcode
+          )
         `)
         .order("updated_at", { ascending: false });
 
@@ -563,22 +743,25 @@
           cause_type: "damage",
           product_name: item.product_name || "-",
           product_unit: "-",
+          product_code: item.products?.product_code || item.products?.barcode || "-",
           batch_no: item.batch_no || "-",
           reference_date: item.reported_at,
           qty: Number(item.damage_qty || 0),
           supplier_name: item.supplier || "-",
+          reason_text: item.damage_reason || "สินค้าชำรุด",
           final_status: normalizeDamageFinalStatus(item.damage_status),
           note: item.note || item.damage_reason || "",
+          handled_by: item.updated_by || item.reported_by || "-",
           handled_at: item.updated_at || item.reported_at
         }))
-        .filter(item => ["returned", "disposed", "damaged"].includes(item.final_status));
+        .filter(item => ["returned", "disposed"].includes(item.final_status));
     }
 
     async function loadData() {
       const tbody = document.getElementById("tableBody");
       tbody.innerHTML = `
         <tr>
-          <td colspan="9" class="loading-row">กำลังโหลดข้อมูล...</td>
+          <td colspan="10" class="loading-row">กำลังโหลดข้อมูล...</td>
         </tr>
       `;
 
@@ -604,7 +787,7 @@
 
         tbody.innerHTML = `
           <tr>
-            <td colspan="9" class="empty-state">โหลดข้อมูลไม่สำเร็จ</td>
+            <td colspan="10" class="empty-state">โหลดข้อมูลไม่สำเร็จ</td>
           </tr>
         `;
 
@@ -625,6 +808,7 @@
         rows = rows.filter(item =>
           String(item.product_name || "").toLowerCase().includes(search) ||
           String(item.batch_no || "").toLowerCase().includes(search) ||
+          String(item.product_code || "").toLowerCase().includes(search) ||
           String(item.supplier_name || "").toLowerCase().includes(search) ||
           String(item.note || "").toLowerCase().includes(search)
         );
@@ -663,7 +847,7 @@
       if (!rows.length) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="9" class="empty-state">ไม่พบข้อมูลประวัติ</td>
+            <td colspan="10" class="empty-state">ไม่พบข้อมูลประวัติ</td>
           </tr>
         `;
         return;
@@ -672,13 +856,14 @@
       tbody.innerHTML = rows.map(item => `
         <tr>
           <td>${getCauseBadge(item.cause_type)}</td>
-          <td><strong>${escapeHtml(item.product_name)}</strong><div class="sub-mini-text">หน่วย: ${escapeHtml(item.product_unit || "-")}</div></td>
-          <td>${escapeHtml(item.batch_no || "-")}</td>
+          <td><strong>${escapeHtml(item.product_name)}</strong><div class="sub-mini-text">ล็อต: ${escapeHtml(item.batch_no || "-")}</div><div class="sub-mini-text">หน่วย: ${escapeHtml(item.product_unit || "-")}</div></td>
+          <td>${escapeHtml(item.product_code || "-")}</td>
           <td>${escapeHtml(formatDate(item.reference_date))}</td>
           <td>${escapeHtml(formatNumber(item.qty))}</td>
-          <td>${escapeHtml(item.supplier_name || "-")}</td>
+          <td><strong>${escapeHtml(item.supplier_name || "-")}</strong><div class="sub-mini-text">${escapeHtml(item.reason_text || "-")}</div></td>
           <td>${getStatusBadge(item.final_status)}</td>
           <td class="history-note-cell">${renderHistoryNote(item.note)}</td>
+          <td>${escapeHtml(item.handled_by || "-")}</td>
           <td>${escapeHtml(formatDateTime(item.handled_at))}</td>
         </tr>
       `).join("");

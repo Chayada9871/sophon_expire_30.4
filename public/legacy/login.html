@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>เข้าสู่ระบบ - ระบบติดตามวันหมดอายุ</title>
+  <title>เข้าสู่ระบบ - Sophon Expire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="css/main.css">
@@ -10,39 +10,117 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: "Prompt", Arial, sans-serif;
-      background: linear-gradient(135deg, #4f46e5, #6366f1);
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
-      padding: 16px;
-      box-sizing: border-box;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      font-family: "Prompt", Arial, sans-serif;
+      color: #0f172a;
+      background:
+        linear-gradient(90deg, rgba(249, 115, 22, 0.1) 0 1px, transparent 1px 84px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 84px),
+        linear-gradient(135deg, #020617 0%, #111827 54%, #f97316 180%);
+    }
+
+    .login-shell {
+      width: 100%;
+      max-width: 980px;
+      min-height: 560px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(380px, 0.95fr);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: #ffffff;
+      box-shadow: 0 30px 80px rgba(2, 6, 23, 0.36);
+    }
+
+    .brand-panel {
+      display: grid;
+      align-content: center;
+      gap: 28px;
+      padding: 42px;
+      color: #ffffff;
+      background:
+        linear-gradient(180deg, rgba(249, 115, 22, 0.16), transparent 42%),
+        linear-gradient(135deg, #020617 0%, #111827 54%, #271089 118%);
+    }
+
+    .logo-box {
+      width: 132px;
+      height: 132px;
+      border: 1px solid rgba(249, 115, 22, 0.5);
+      box-shadow:
+        0 0 0 8px rgba(255, 255, 255, 0.04),
+        0 18px 38px rgba(0, 0, 0, 0.32);
+      background: #271089;
+      overflow: hidden;
+    }
+
+    .logo-box img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .kicker {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 10px;
+      border: 1px solid rgba(249, 115, 22, 0.42);
+      background: rgba(249, 115, 22, 0.16);
+      color: #fed7aa;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .brand-panel h1 {
+      margin: 0 0 12px;
+      font-size: 42px;
+      line-height: 1.05;
+    }
+
+    .brand-panel p {
+      max-width: 440px;
+      margin: 0;
+      color: #cbd5e1;
+      line-height: 1.75;
     }
 
     .login-card {
-      background: white;
-      padding: 32px;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 420px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      box-sizing: border-box;
+      display: grid;
+      align-content: center;
+      padding: 42px;
+      background: #ffffff;
     }
 
-    .login-card h1 {
-      margin: 0 0 10px;
-      font-size: 26px;
-      text-align: center;
-      color: #111827;
+    .form-head {
+      margin-bottom: 22px;
     }
 
-    .login-card p {
-      text-align: center;
-      color: #666;
-      margin-bottom: 24px;
+    .form-head .kicker {
+      margin-bottom: 12px;
+      border-color: #fed7aa;
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .form-head h2 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    .form-head p {
+      margin: 0;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.6;
     }
 
     .form-group {
@@ -50,126 +128,143 @@
     }
 
     label {
-      font-size: 14px;
-      font-weight: bold;
       display: block;
       margin-bottom: 6px;
-      color: #111827;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 900;
     }
 
     input {
       width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
+      height: 46px;
+      padding: 0 12px;
+      border: 1px solid #d8dee8;
+      border-radius: 0;
+      background: #f8fafc;
       font-size: 14px;
-      box-sizing: border-box;
       font-family: "Prompt", Arial, sans-serif;
     }
 
     input:focus {
       outline: none;
-      border-color: #4f46e5;
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+      border-color: #f97316;
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.16);
     }
 
     button {
       width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: #4f46e5;
-      color: white;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
+      height: 48px;
+      border: 0;
+      border-radius: 0;
+      background: #f97316;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 900;
       font-family: "Prompt", Arial, sans-serif;
-      transition: background 0.2s ease;
+      cursor: pointer;
     }
 
     button:hover {
-      background: #4338ca;
+      background: #c2410c;
     }
 
     button:disabled {
-      background: #9ca3af;
+      opacity: 0.7;
       cursor: not-allowed;
     }
 
-    .error {
-      color: #dc2626;
-      font-size: 13px;
-      margin-top: 12px;
-      text-align: center;
-      min-height: 18px;
-    }
-
+    .error,
     .success {
-      color: #059669;
-      font-size: 13px;
-      margin-top: 12px;
-      text-align: center;
       min-height: 18px;
+      margin-top: 12px;
+      font-size: 13px;
+      text-align: center;
     }
 
-    .footer {
-      margin-top: 16px;
-      text-align: center;
-      font-size: 12px;
-      color: #999;
-    }
+    .error { color: #dc2626; }
+    .success { color: #059669; }
 
     .hint {
-      margin-top: 10px;
+      margin-top: 14px;
+      padding: 10px 12px;
+      border: 1px solid #d8dee8;
+      background: #f8fafc;
+      color: #64748b;
       font-size: 12px;
-      color: #6b7280;
-      text-align: center;
       line-height: 1.6;
     }
 
-    .demo-box {
-      margin-top: 16px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
-      font-size: 12px;
-      color: #475569;
-      line-height: 1.7;
-    }
+    @media (max-width: 760px) {
+      body { padding: 0; }
 
-    .demo-box strong {
-      color: #111827;
+      .login-shell {
+        min-height: 100vh;
+        grid-template-columns: 1fr;
+        border: 0;
+      }
+
+      .brand-panel {
+        min-height: 260px;
+        padding: 28px 22px;
+      }
+
+      .logo-box {
+        width: 86px;
+        height: 86px;
+      }
+
+      .brand-panel h1 {
+        font-size: 32px;
+      }
+
+      .login-card {
+        padding: 28px 22px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="login-card">
-    <h1>ระบบติดตามวันหมดอายุ</h1>
-    <p>กรุณาเข้าสู่ระบบเพื่อใช้งาน</p>
+  <main class="login-shell">
+    <section class="brand-panel">
+      <div class="logo-box">
+        <img src="/images/logo.png" alt="Sophon Expire">
+      </div>
+      <div>
+        <div class="kicker">Sophon Driver Style</div>
+        <h1>Sophon Expire</h1>
+        <p>ระบบติดตามวันหมดอายุ รับเข้า ตัดสต๊อก และตรวจนับสินค้า สำหรับทีมหน้าร้านและคลังสินค้า</p>
+      </div>
+    </section>
 
-    <form id="loginForm">
-      <div class="form-group">
-        <label for="username">ชื่อผู้ใช้</label>
-        <input type="text" id="username" autocomplete="username" required>
+    <section class="login-card">
+      <div class="form-head">
+        <div class="kicker">เข้าสู่ระบบ</div>
+        <h2>ยินดีต้อนรับ</h2>
+        <p>กรอกชื่อผู้ใช้และรหัสผ่านเพื่อเริ่มทำงาน</p>
       </div>
 
-      <div class="form-group">
-        <label for="password">รหัสผ่าน</label>
-        <input type="password" id="password" autocomplete="current-password" required>
-      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">ชื่อผู้ใช้</label>
+          <input type="text" id="username" autocomplete="username" placeholder="กรอกชื่อผู้ใช้" required>
+        </div>
 
-      <button type="submit" id="loginBtn">เข้าสู่ระบบ</button>
+        <div class="form-group">
+          <label for="password">รหัสผ่าน</label>
+          <input type="password" id="password" autocomplete="current-password" placeholder="กรอกรหัสผ่าน" required>
+        </div>
 
-      <div class="error" id="errorMsg"></div>
-      <div class="success" id="successMsg"></div>
-    </form>
+        <button type="submit" id="loginBtn">เข้าสู่ระบบ</button>
 
-    <div class="hint">
-      ระบบจะตรวจสอบชื่อผู้ใช้และรหัสผ่านจากฐานข้อมูล Supabase
-    </div>
-  </div>
+        <div class="error" id="errorMsg"></div>
+        <div class="success" id="successMsg"></div>
+      </form>
+
+      <div class="hint">ระบบจะตรวจสอบชื่อผู้ใช้และรหัสผ่านจากฐานข้อมูล Supabase</div>
+    </section>
+  </main>
 
   <script>
     const SUPABASE_URL = "https://uaqljdqtitdpctjxhutv.supabase.co";
@@ -228,60 +323,53 @@
       }
     }
 
-  // ใช้ตาราง app_users สำหรับเข้าสู่ระบบ
-  async function loginWithUsersTable(username, password) {
-    const { data, error } = await supabaseClient
-      .from("app_users")
-      .select("id, username, password, role")
-      .eq("username", username)
-      .eq("password", password)
-      .single();
+    async function loginWithUsersTable(username, password) {
+      const { data, error } = await supabaseClient
+        .from("app_users")
+        .select("id, username, password, role")
+        .eq("username", username)
+        .eq("password", password)
+        .single();
 
-    if (error || !data) {
-      throw new Error("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+      if (error || !data) {
+        throw new Error("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+      }
+
+      return data;
     }
 
-    return data;
-  }
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      clearMessages();
 
-  form.addEventListener("submit", async function(e) {
-    e.preventDefault();
-    clearMessages();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
 
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
+      if (!username || !password) {
+        setError("กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
+        return;
+      }
 
-    if (!username || !password) {
-      setError("กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
-      return;
-    }
+      try {
+        setLoading(true);
+        setSuccess("กำลังตรวจสอบข้อมูล...");
 
-    try {
-      setLoading(true);
-      setSuccess("กำลังตรวจสอบข้อมูล...");
+        const user = await loginWithUsersTable(username, password);
+        saveUserSession(user);
+        setSuccess("เข้าสู่ระบบสำเร็จ (" + getRoleLabel(user.role) + ")");
 
-      const user = await loginWithUsersTable(username, password);
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 600);
+      } catch (err) {
+        console.error("Login error:", err);
+        setError(err.message || "เกิดข้อผิดพลาดในการเข้าสู่ระบบ");
+      } finally {
+        setLoading(false);
+      }
+    });
 
-      saveUserSession(user);
-
-      setSuccess(
-        "เข้าสู่ระบบสำเร็จ (" + getRoleLabel(user.role) + ")"
-      );
-
-      setTimeout(() => {
-        window.location.href = "dashboard.html";
-      }, 600);
-
-    } catch (err) {
-      console.error("Login error:", err);
-      setError(err.message || "เกิดข้อผิดพลาดในการเข้าสู่ระบบ");
-    } finally {
-      setLoading(false);
-    }
-  });
-
-  redirectIfLoggedIn();
+    redirectIfLoggedIn();
   </script>
 </body>
 </html>
-

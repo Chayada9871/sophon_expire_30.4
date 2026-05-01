@@ -521,7 +521,7 @@
     }
 
     .main-grid {
-      grid-template-columns: minmax(360px, 0.72fr) minmax(0, 1.28fr) !important;
+      grid-template-columns: 1fr !important;
       gap: 18px !important;
     }
 
@@ -596,6 +596,168 @@
     .modal-header,
     .modal-footer {
       background: #f8fafc !important;
+    }
+
+    .stock-check-card .table-wrap {
+      border-color: #d8dee8 !important;
+      background: #fff;
+    }
+
+    .stock-out-table {
+      min-width: 1220px !important;
+      table-layout: fixed !important;
+      font-size: 12px;
+    }
+
+    .stock-out-table th,
+    .stock-out-table td {
+      padding: 8px 9px !important;
+      line-height: 1.35;
+      vertical-align: top;
+    }
+
+    .stock-out-table th {
+      font-size: 11px !important;
+      letter-spacing: 0.03em !important;
+    }
+
+    .stock-out-table th:nth-child(1),
+    .stock-out-table td:nth-child(1) {
+      width: 210px;
+      min-width: 210px;
+    }
+
+    .stock-out-table th:nth-child(2),
+    .stock-out-table td:nth-child(2),
+    .stock-out-table th:nth-child(3),
+    .stock-out-table td:nth-child(3),
+    .stock-out-table th:nth-child(4),
+    .stock-out-table td:nth-child(4) {
+      width: 104px;
+      min-width: 104px;
+    }
+
+    .stock-out-table th:nth-child(5),
+    .stock-out-table td:nth-child(5) {
+      width: 150px;
+      min-width: 150px;
+    }
+
+    .stock-out-table th:nth-child(6),
+    .stock-out-table td:nth-child(6) {
+      width: 270px !important;
+      min-width: 270px !important;
+    }
+
+    .stock-out-table th:nth-child(7),
+    .stock-out-table td:nth-child(7) {
+      width: 145px;
+      min-width: 145px;
+    }
+
+    .stock-out-table th:nth-child(8),
+    .stock-out-table td:nth-child(8) {
+      width: 112px;
+      min-width: 112px;
+    }
+
+    .stock-out-table th:nth-child(9),
+    .stock-out-table td:nth-child(9) {
+      width: 125px;
+      min-width: 125px;
+    }
+
+    .stock-out-table .product-main-name {
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .stock-out-table .sub-mini-text,
+    .stock-out-table .product-main-meta {
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .stock-out-table .barcode-main {
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    .stock-out-table .action-group {
+      gap: 6px !important;
+    }
+
+    .stock-out-table .action-group button {
+      min-height: 30px !important;
+      padding: 6px 8px !important;
+      font-size: 11px !important;
+      line-height: 1.25;
+      width: 100%;
+    }
+
+    .stock-out-table .status-badge,
+    .stock-out-table .manager-flag-badge,
+    .stock-out-table .change-pill {
+      font-size: 11px !important;
+      padding: 4px 6px !important;
+    }
+
+    .stock-out-table .manager-change-box {
+      margin-top: 5px;
+      padding: 5px 6px;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .stock-out-table .pdf-deduct-summary {
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .stock-out-table .pdf-deduct-line {
+      gap: 6px;
+      padding: 5px 6px;
+      font-size: 11px;
+    }
+
+    .stock-out-table .pdf-deduct-line strong {
+      font-size: 12px;
+    }
+
+    .stock-out-table .lot-card {
+      padding: 7px 8px;
+      margin-bottom: 6px;
+    }
+
+    .stock-out-table .lot-card-head {
+      gap: 6px;
+      margin-bottom: 5px;
+    }
+
+    .stock-out-table .lot-card-no {
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .stock-out-table .lot-card-status {
+      font-size: 10px !important;
+      padding: 3px 5px;
+    }
+
+    .stock-out-table .lot-meta-list {
+      gap: 2px;
+    }
+
+    .stock-out-table .lot-meta-row,
+    .stock-out-table .lot-history-title,
+    .stock-out-table .lot-history-line {
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .stock-out-table .lot-history-box {
+      margin-top: 5px;
+      padding-top: 5px;
     }
 
     .page.user-view .stockout-guide {

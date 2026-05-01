@@ -51,45 +51,63 @@ export default function LoginPage() {
 
   return (
     <main className="auth-shell">
-      <section className="auth-card">
-        <div className="auth-brand">
-          <img src="/images/logo.png" alt="Sophon" />
+      <section className="auth-panel" aria-label="เข้าสู่ระบบ Sophon Expire">
+        <div className="auth-visual">
+          <div className="auth-logo-box">
+            <img src="/images/logo.png" alt="Sophon Expire" />
+          </div>
+          <div>
+            <div className="auth-kicker">Sophon Driver Style</div>
+            <h1>Sophon Expire</h1>
+            <p>
+              ระบบติดตามวันหมดอายุ รับเข้า ตัดสต๊อก และตรวจนับสินค้า
+              สำหรับทีมหน้าร้านและคลังสินค้า
+            </p>
+          </div>
         </div>
-        <div className="auth-kicker">Sophon Driver</div>
-        <h1>เข้าสู่ระบบ</h1>
-        <p>เริ่มใช้งานระบบติดตามวันหมดอายุ ด้วยหน้าระบบใหม่ที่อ่านง่ายและจัดการต่อได้สะดวกขึ้น</p>
 
-        <form onSubmit={handleSubmit}>
-          <div className="field">
-            <label htmlFor="username">ชื่อผู้ใช้</label>
-            <input
-              id="username"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              autoComplete="username"
-              required
-            />
+        <div className="auth-card">
+          <div className="auth-form-head">
+            <div className="auth-kicker">เข้าสู่ระบบ</div>
+            <h2>ยินดีต้อนรับ</h2>
+            <p>กรอกชื่อผู้ใช้และรหัสผ่านเพื่อเริ่มทำงาน</p>
           </div>
 
-          <div className="field">
-            <label htmlFor="password">รหัสผ่าน</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              autoComplete="current-password"
-              required
-            />
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="field">
+              <label htmlFor="username">ชื่อผู้ใช้</label>
+              <input
+                id="username"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                autoComplete="username"
+                placeholder="กรอกชื่อผู้ใช้"
+                required
+              />
+            </div>
 
-          <button className="primary-button" type="submit" disabled={loading}>
-            {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
-          </button>
-        </form>
+            <div className="field">
+              <label htmlFor="password">รหัสผ่าน</label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                autoComplete="current-password"
+                placeholder="กรอกรหัสผ่าน"
+                required
+              />
+            </div>
 
-        <div className="error-text">{error}</div>
-        <div className="success-text">{success}</div>
+            <button className="primary-button" type="submit" disabled={loading}>
+              {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
+            </button>
+          </form>
+
+          <div className="error-text">{error}</div>
+          <div className="success-text">{success}</div>
+          <div className="auth-helper">ระบบจะตรวจสอบบัญชีจากฐานข้อมูล Supabase</div>
+        </div>
       </section>
     </main>
   );

@@ -1726,6 +1726,109 @@
         grid-template-columns: 1fr !important;
       }
     }
+
+    .overview-panel .quick-actions.staff-guide,
+    .quick-actions.staff-guide {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+    }
+
+    .overview-panel .staff-guide .action-card,
+    .staff-guide .action-card {
+      min-height: 0 !important;
+      display: grid !important;
+      grid-template-columns: 42px minmax(0, 1fr) auto !important;
+      column-gap: 14px !important;
+      align-items: center !important;
+      padding: 14px 16px !important;
+      padding-left: 16px !important;
+      overflow: visible !important;
+      border-left: 4px solid #f97316 !important;
+    }
+
+    .overview-panel .staff-guide .action-card::before,
+    .staff-guide .action-card::before {
+      position: static !important;
+      width: 34px !important;
+      height: 34px !important;
+      grid-row: 1 / span 2 !important;
+      margin: 0 !important;
+    }
+
+    .overview-panel .staff-guide .action-tag,
+    .staff-guide .action-tag {
+      display: none !important;
+    }
+
+    .overview-panel .staff-guide .action-title,
+    .overview-panel .staff-guide .action-sub,
+    .staff-guide .action-title,
+    .staff-guide .action-sub {
+      min-width: 0 !important;
+      overflow-wrap: normal !important;
+      word-break: normal !important;
+      white-space: normal !important;
+    }
+
+    .overview-panel .staff-guide .action-title,
+    .staff-guide .action-title {
+      margin: 0 !important;
+      font-size: 16px !important;
+      line-height: 1.35 !important;
+    }
+
+    .overview-panel .staff-guide .action-sub,
+    .staff-guide .action-sub {
+      margin-top: 4px !important;
+      font-size: 12px !important;
+      line-height: 1.5 !important;
+    }
+
+    .overview-panel .staff-guide .action-card::after,
+    .staff-guide .action-card::after {
+      content: "เปิด" !important;
+      position: static !important;
+      width: auto !important;
+      height: auto !important;
+      border-radius: 0 !important;
+      background: #fff7ed !important;
+      border: 1px solid #fed7aa !important;
+      color: #c2410c !important;
+      padding: 7px 10px !important;
+      font-size: 12px !important;
+      font-weight: 900 !important;
+    }
+
+    .overview-panel {
+      grid-template-columns: 1fr !important;
+    }
+
+    @media (max-width: 1200px) {
+      .stats-grid {
+        display: flex !important;
+        gap: 12px !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-snap-type: x proximity !important;
+        padding-bottom: 8px !important;
+      }
+
+      .stats-grid .stat-card {
+        flex: 0 0 190px !important;
+        scroll-snap-align: start !important;
+      }
+
+      .quick-actions.staff-guide {
+        overflow-x: visible !important;
+      }
+
+      .quick-actions.staff-guide .action-card {
+        flex: initial !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1886,25 +1989,25 @@
             <a class="action-card" href="expire_returns.html">
               <div class="action-tag">ขั้นตอน 1</div>
               <div class="action-title">ตรวจของหมดอายุ / ชำรุด</div>
-              <div class="action-sub">เปิดรายการที่ระบบเตือน แล้วเช็กสินค้า ล็อต และจำนวนให้ตรงกับของจริง</div>
+              <div class="action-sub">เปิดรายการเตือน แล้วเช็กสินค้า ล็อต และจำนวนให้ตรงกับของจริง</div>
             </a>
 
             <a class="action-card" href="damaged_manage.html">
               <div class="action-tag">ขั้นตอน 2</div>
-              <div class="action-title">บันทึกหรือแจ้งปัญหา</div>
-              <div class="action-sub">ถ้ามีสินค้าเสียหาย ให้บันทึกรายการและอัปเดตสถานะการติดต่อผู้จำหน่าย</div>
+              <div class="action-title">บันทึกปัญหา</div>
+              <div class="action-sub">ถ้ามีสินค้าเสียหาย ให้บันทึกจำนวน สาเหตุ และสถานะการติดต่อผู้จำหน่าย</div>
             </a>
 
             <a class="action-card" href="expired_history.html">
               <div class="action-tag">ขั้นตอน 3</div>
-              <div class="action-title">ยืนยันการคืน / ตัดออก</div>
-              <div class="action-sub">หลังคืน supplier หรือทำลายแล้ว ให้ตรวจว่ารายการถูกบันทึกในประวัติเรียบร้อย</div>
+              <div class="action-title">ตรวจประวัติงาน</div>
+              <div class="action-sub">หลังคืนหรือทำลายแล้ว ให้เช็กว่ารายการถูกบันทึกเรียบร้อย</div>
             </a>
 
             <a class="action-card" href="products.html">
               <div class="action-tag">ขั้นตอน 4</div>
-              <div class="action-title">ตรวจข้อมูลสินค้าเมื่อไม่แน่ใจ</div>
-              <div class="action-sub">ใช้หน้านี้ค้นหาชื่อสินค้า บาร์โค้ด หน่วย และรายละเอียดก่อนบันทึกงาน</div>
+              <div class="action-title">ค้นหาข้อมูลสินค้า</div>
+              <div class="action-sub">ใช้เมื่อไม่แน่ใจชื่อสินค้า บาร์โค้ด หน่วย หรือรายละเอียดก่อนบันทึกงาน</div>
             </a>
           </div>
         </div>
