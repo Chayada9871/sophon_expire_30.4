@@ -828,7 +828,7 @@
       <a class="guide-step" data-step="3" href="#stockCheckCardTitle">
         <div class="guide-kicker">Stock Check</div>
         <div class="guide-title">ตัดสต๊อกและตรวจนับ</div>
-        <div class="guide-text">ตัดตาม FEFO แล้วค้นหาสินค้าเพื่อตรวจจำนวนจริงหน้าร้าน</div>
+        <div class="guide-text">ตัดจาก PDF หรือกรอกตัดเองตาม FEFO แล้วตรวจจำนวนจริงหน้าร้าน</div>
       </a>
       <a class="guide-step" data-step="4" href="expired_history.html">
         <div class="guide-kicker">Follow Up</div>
@@ -941,7 +941,55 @@
         </div>
 
         <div class="card">
-          <h2>3. เอกสารล่าสุด</h2>
+          <h2>3. ตัดสต๊อกเอง</h2>
+          <p class="subtext">สำหรับ ADMIN/MANAGER กรอกสินค้าและจำนวนที่ต้องการตัดออกได้โดยไม่ต้องอัปโหลดไฟล์</p>
+
+          <form id="manualStockCutForm" class="form-grid">
+            <div class="two-col">
+              <div class="form-group">
+                <label for="manualStockCutProduct">สินค้า *</label>
+                <input type="text" id="manualStockCutProductSearch" placeholder="ค้นหาชื่อสินค้า / รหัส / บาร์โค้ด">
+                <select id="manualStockCutProduct" required>
+                  <option value="">-- เลือกสินค้า --</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="manualStockCutQty">จำนวนที่ตัด *</label>
+                <input type="number" id="manualStockCutQty" min="0.01" step="0.01" placeholder="0" required>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div class="form-group">
+                <label for="manualStockCutDate">วันที่ตัด *</label>
+                <input type="date" id="manualStockCutDate" required>
+              </div>
+
+              <div class="form-group">
+                <label for="manualStockCutRef">เลขอ้างอิง / เหตุผล</label>
+                <input type="text" id="manualStockCutRef" placeholder="เช่น ขายหน้าร้าน / ปรับยอด / ใบขาย">
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <label for="manualStockCutNote">หมายเหตุ</label>
+              <textarea id="manualStockCutNote" placeholder="รายละเอียดเพิ่มเติม"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-warning" id="manualStockCutBtn">ตัดสต๊อกเอง</button>
+              <button type="button" class="btn-secondary" id="resetManualStockCutBtn" onclick="resetManualStockCutForm()">ล้างข้อมูล</button>
+            </div>
+
+            <div id="manualStockCutReadonlyNote" class="readonly-note hidden">
+              เฉพาะ ADMIN และ MANAGER เท่านั้นที่สามารถตัดสต๊อกเองได้
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>4. เอกสารล่าสุด</h2>
           <p class="subtext">เลือก เปิด อ่านซ้ำ หรือยกเลิกการตัดสต๊อกตามสิทธิ์ผู้ใช้</p>
           <div id="salesUploadsList"></div>
         </div>
@@ -1195,6 +1243,7 @@
         salesUpload: false,
         salesSave: false,
         salesProcess: false,
+        manualStockCut: false,
         stockCheckSave: false
       }
     };
@@ -1408,6 +1457,15 @@
       const salesDate = $("salesDate");
       const salesPdf = $("salesPdf");
       const salesNote = $("salesUploadNote");
+      const manualStockCutProductSearch = $("manualStockCutProductSearch");
+      const manualStockCutProduct = $("manualStockCutProduct");
+      const manualStockCutQty = $("manualStockCutQty");
+      const manualStockCutDate = $("manualStockCutDate");
+      const manualStockCutRef = $("manualStockCutRef");
+      const manualStockCutNote = $("manualStockCutNote");
+      const manualStockCutBtn = $("manualStockCutBtn");
+      const resetManualStockCutBtn = $("resetManualStockCutBtn");
+      const manualStockCutReadonlyNote = $("manualStockCutReadonlyNote");
       const page = $("mainPage");
       const title = $("pageTitle");
       const subtitle = $("pageSubtitle");
@@ -1428,6 +1486,15 @@
       if (salesPdf) salesPdf.disabled = !canAddSalesUpload();
       if (salesNote) salesNote.disabled = !canAddSalesUpload();
       if (selectedSalesUpload) selectedSalesUpload.disabled = !allowSalesAccess;
+      if (manualStockCutProductSearch) manualStockCutProductSearch.disabled = !canProcessSalesUpload();
+      if (manualStockCutProduct) manualStockCutProduct.disabled = !canProcessSalesUpload();
+      if (manualStockCutQty) manualStockCutQty.disabled = !canProcessSalesUpload();
+      if (manualStockCutDate) manualStockCutDate.disabled = !canProcessSalesUpload();
+      if (manualStockCutRef) manualStockCutRef.disabled = !canProcessSalesUpload();
+      if (manualStockCutNote) manualStockCutNote.disabled = !canProcessSalesUpload();
+      if (manualStockCutBtn) manualStockCutBtn.classList.toggle("hidden", !canProcessSalesUpload());
+      if (resetManualStockCutBtn) resetManualStockCutBtn.classList.toggle("hidden", !canProcessSalesUpload());
+      if (manualStockCutReadonlyNote) manualStockCutReadonlyNote.classList.toggle("hidden", canProcessSalesUpload());
 
       if (salesPanel) salesPanel.style.display = allowSalesPanel ? "block" : "none";
       if (lockedCard) lockedCard.style.display = "none";
@@ -1766,6 +1833,65 @@ function formatEditorTimestamp(value) {
 
       if (error) throw error;
       state.products = data || [];
+    }
+
+    function getProductOptionLabel(product) {
+      const code = product.product_code || product.barcode || "-";
+      return `${product.product_name || "-"} (${code})`;
+    }
+
+    function populateManualStockCutProducts() {
+      const select = $("manualStockCutProduct");
+      if (!select) return;
+
+      const currentValue = select.value;
+      const searchText = String($("manualStockCutProductSearch")?.value || "").trim().toLowerCase();
+      const selectedProduct = currentValue
+        ? state.products.find(product => String(product.id) === String(currentValue))
+        : null;
+
+      select.innerHTML = `<option value="">-- เลือกสินค้า --</option>`;
+
+      const visibleProducts = state.products.filter(product => {
+        if (!searchText) return true;
+        return [
+          product.product_name,
+          product.product_code,
+          product.barcode
+        ].some(value => String(value || "").toLowerCase().includes(searchText));
+      });
+
+      if (selectedProduct && !visibleProducts.some(product => String(product.id) === String(selectedProduct.id))) {
+        visibleProducts.unshift(selectedProduct);
+      }
+
+      visibleProducts.forEach(product => {
+        const option = document.createElement("option");
+        option.value = String(product.id);
+        option.textContent = getProductOptionLabel(product);
+        select.appendChild(option);
+      });
+
+      if (currentValue && state.products.some(product => String(product.id) === String(currentValue))) {
+        select.value = currentValue;
+      }
+    }
+
+    function getAvailableBatchesByProductId(productId) {
+      return state.batches
+        .filter(item =>
+          Number(item.product_id) === Number(productId) &&
+          normalizeNumber(item.quantity_remaining) > 0 &&
+          getStatus(calculateDaysLeft(item.expiry_date)) !== "expired"
+        )
+        .sort((a, b) => new Date(a.expiry_date || "9999-12-31") - new Date(b.expiry_date || "9999-12-31"));
+    }
+
+    function resetManualStockCutForm() {
+      const form = $("manualStockCutForm");
+      if (form) form.reset();
+      if ($("manualStockCutDate")) $("manualStockCutDate").value = todayString();
+      populateManualStockCutProducts();
     }
 
     function splitSalesLinesByStock(lines) {
@@ -3243,6 +3369,166 @@ function formatEditorTimestamp(value) {
       };
     }
 
+    async function deductManualStockByFEFO({ productId, qty, cutDate, referenceText, noteText }) {
+      const product = state.products.find(item => Number(item.id) === Number(productId));
+      if (!product) throw new Error("ไม่พบสินค้า");
+
+      const targetQty = Number(normalizeNumber(qty).toFixed(2));
+      let remainingToDeduct = targetQty;
+      let deductedTotal = 0;
+
+      const batches = getAvailableBatchesByProductId(productId);
+      const totalAvailable = batches.reduce(
+        (sum, batch) => sum + normalizeNumber(batch.quantity_remaining),
+        0
+      );
+
+      if (!batches.length) {
+        throw new Error(`ไม่พบล็อตที่ตัดได้สำหรับ ${product.product_name || "-"}`);
+      }
+
+      if (totalAvailable < targetQty) {
+        throw new Error(`สต๊อกไม่พอ | ต้องการ ${formatQty(targetQty)} | มี ${formatQty(totalAvailable)}`);
+      }
+
+      const currentName = getCurrentDisplayName();
+      const deductionLog = [];
+      const detailText = [referenceText, noteText].filter(Boolean).join(" | ");
+
+      for (const batch of batches) {
+        if (remainingToDeduct <= 0) break;
+
+        const currentRemaining = normalizeNumber(batch.quantity_remaining);
+        if (currentRemaining <= 0) continue;
+
+        const deductQty = Math.min(currentRemaining, remainingToDeduct);
+        if (deductQty <= 0) continue;
+
+        const newRemaining = Number((currentRemaining - deductQty).toFixed(2));
+        const manualNote =
+          `[${timestampThai()}] ตัดสต๊อกเอง | วันที่ตัด ${cutDate || todayString()} | ` +
+          `ตัด ${formatQty(deductQty)} | ก่อน ${formatQty(currentRemaining)} | หลัง ${formatQty(newRemaining)} | ` +
+          `ผู้บันทึก ${currentName}${detailText ? " | " + detailText : ""}`;
+
+        const newNote = appendNote(batch.note, manualNote);
+
+        const { error: updateError } = await supabaseClient
+          .from("batches")
+          .update({
+            quantity_remaining: newRemaining,
+            note: newNote,
+            status: getStatus(calculateDaysLeft(batch.expiry_date)),
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", batch.id);
+
+        if (updateError) throw updateError;
+
+        await insertStockMovement({
+          batch_id: batch.id,
+          product_id: batch.product_id,
+          movement_type: "manual_stock_cut",
+          qty_in: 0,
+          qty_out: deductQty,
+          balance_after: newRemaining,
+          reference_type: "manual_stock_cut",
+          note: `ตัดสต๊อกเอง | ${product.product_name || "-"} | ${detailText || "-"} | ผู้บันทึก ${currentName}`
+        });
+
+        batch.quantity_remaining = newRemaining;
+        batch.note = newNote;
+
+        deductedTotal += deductQty;
+        remainingToDeduct -= deductQty;
+
+        deductedTotal = Number(deductedTotal.toFixed(2));
+        remainingToDeduct = Number(remainingToDeduct.toFixed(2));
+
+        deductionLog.push(`${batch.batch_no} = ${formatQty(deductQty)}`);
+      }
+
+      if (remainingToDeduct !== 0 || deductedTotal !== targetQty) {
+        throw new Error(`ยอดตัดไม่ตรง | ต้องการ ${formatQty(targetQty)} | ตัดได้ ${formatQty(deductedTotal)}`);
+      }
+
+      return {
+        product_name: product.product_name,
+        deducted_total: deductedTotal,
+        batches: deductionLog
+      };
+    }
+
+    async function submitManualStockCut() {
+      if (state.loading.manualStockCut) return;
+      if (!canProcessSalesUpload()) {
+        showMessage("เฉพาะ ADMIN และ MANAGER เท่านั้นที่ตัดสต๊อกเองได้", "error");
+        return;
+      }
+
+      const productId = $("manualStockCutProduct").value;
+      const qty = normalizeNumber($("manualStockCutQty").value);
+      const cutDate = $("manualStockCutDate").value || todayString();
+      const referenceText = $("manualStockCutRef").value.trim();
+      const noteText = $("manualStockCutNote").value.trim();
+
+      if (!productId) return alert("กรุณาเลือกสินค้า");
+      if (qty <= 0) return alert("กรุณากรอกจำนวนที่ต้องการตัดมากกว่า 0");
+
+      await loadBatches();
+
+      const product = state.products.find(item => Number(item.id) === Number(productId));
+      const batches = getAvailableBatchesByProductId(productId);
+      let remain = qty;
+      const preview = [];
+
+      for (const batch of batches) {
+        if (remain <= 0) break;
+        const deductQty = Math.min(normalizeNumber(batch.quantity_remaining), remain);
+        if (deductQty > 0) {
+          preview.push(`${batch.batch_no} = ${formatQty(deductQty)}`);
+          remain = Number((remain - deductQty).toFixed(2));
+        }
+      }
+
+      if (remain > 0) {
+        const availableQty = Number((qty - remain).toFixed(2));
+        alert(`สต๊อกไม่พอสำหรับ ${product?.product_name || "-"}\nต้องการ ${formatQty(qty)} | มี ${formatQty(availableQty)}`);
+        return;
+      }
+
+      const confirmed = confirm(
+        `ยืนยันตัดสต๊อกเอง?\nสินค้า: ${product?.product_name || "-"}\nจำนวน: ${formatQty(qty)}\nล็อตที่จะถูกตัด:\n${preview.join("\n")}`
+      );
+      if (!confirmed) return;
+
+      try {
+        state.loading.manualStockCut = true;
+        setLoadingButton("manualStockCutBtn", "กำลังตัด...", true);
+        clearMessage();
+
+        const result = await deductManualStockByFEFO({
+          productId,
+          qty,
+          cutDate,
+          referenceText,
+          noteText
+        });
+
+        await refreshAll();
+        resetManualStockCutForm();
+        showMessage(
+          `ตัดสต๊อกเองสำเร็จ: ${result.product_name || "-"} จำนวน ${formatQty(result.deducted_total)} | ${result.batches.join(", ")}`,
+          "success"
+        );
+      } catch (error) {
+        console.error(error);
+        showMessage("ตัดสต๊อกเองไม่สำเร็จ: " + getErrorText(error), "error");
+      } finally {
+        state.loading.manualStockCut = false;
+        setLoadingButton("manualStockCutBtn", "กำลังตัด...", false);
+      }
+    }
+
     function selectSalesUpload(id) {
       if (!canViewSalesFiles()) {
         showMessage("บัญชี USER ไม่มีสิทธิ์ดูเอกสารขาย", "error");
@@ -4363,6 +4649,7 @@ function openProductStockCheckModal(barcode, productId) {
       ]);
       await loadSalesBatchDeductionHistory();
 
+      populateManualStockCutProducts();
       populateSalesUploadSelect();
       renderSalesUploadsList();
       renderBatches();
@@ -4383,6 +4670,13 @@ function openProductStockCheckModal(barcode, productId) {
         await uploadSalesPdfAndCreateRecord();
       });
 
+      $("manualStockCutForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        await submitManualStockCut();
+      });
+
+      $("manualStockCutProductSearch").addEventListener("input", populateManualStockCutProducts);
+
       $("productStockCheckModalBackdrop").addEventListener("click", function (e) {
         if (e.target.id === "productStockCheckModalBackdrop") closeProductStockCheckModal();
       });
@@ -4399,10 +4693,12 @@ function openProductStockCheckModal(barcode, productId) {
 
       showMessage("กำลังโหลดข้อมูล...", "info");
         $("salesDate").value = todayString();
+        $("manualStockCutDate").value = todayString();
 
         [
           "uploadSalesBtn",
           "autoReadPdfBtn",
+          "manualStockCutBtn",
           "productStockCheckBtn",
           "pdfPreviewSaveAndProcessBtn"
         ].forEach(id => {
